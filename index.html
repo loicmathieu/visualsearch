@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>VisualSearch</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="node_modules/cropperjs/dist/cropper.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+            rel="stylesheet"
+            href="node_modules/material-components-web/dist/material-components-web.css">
+</head>
+<!--<h1></h1>-->
+<body class="mdc-typography">
+<header class="mdc-toolbar mdc-toolbar--fixed">
+    <div class="mdc-toolbar__row">
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <span class="mdc-toolbar__title">Visual Search</span>
+        </section>
+    </div>
+</header>
+<div id="loader" class="loader-container hidden">
+    <img src="animal.gif" alt="cool loader">
+</div>
+<div class="options-container">
+    <div id="select-univers-container" class="my-card">
+        <h3>Selectionnez un univers</h3>
+        <div class="radio-btn">
+            <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="femme" name="radios" checked>
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                </div>
+            </div>
+            <label id="radio-femme" for="femme">Femme</label>
+        </div>
+        <div class="radio-btn">
+            <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="homme" name="radios">
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                </div>
+            </div>
+            <label id="radio-homme" for="homme">Homme</label>
+        </div>
+        <div class="radio-btn">
+            <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="fille" name="radios">
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                </div>
+            </div>
+            <label id="radio-fille" for="fille">Fille</label>
+        </div>
+        <div class="radio-btn">
+            <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="garcon" name="radios">
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                </div>
+            </div>
+            <label id="radio-garcon" for="garcon">Garçon</label>
+        </div>
+        <div class="radio-btn">
+            <div class="mdc-radio">
+                <input class="mdc-radio__native-control" type="radio" id="bebe" name="radios">
+                <div class="mdc-radio__background">
+                    <div class="mdc-radio__outer-circle"></div>
+                    <div class="mdc-radio__inner-circle"></div>
+                </div>
+            </div>
+            <label id="radio-bebe" for="bebe">Bébé</label>
+        </div>
+    </div>
+    <button id="picture-icon-button" class="mdc-fab material-icons" aria-label="Favorite">
+        <span class="mdc-fab__icon">
+            <img src="assets/ic_photo_camera_white_24px.svg" alt="camera icon">
+        </span>
+    </button>
+    <div id="input-container"></div>
+    <div id="crop-container">
+        <img id="preview-image" alt="Image preview...">
+    </div>
+    <div id="cropped-image"></div>
+    <img id="cropped-preview" src="" alt="">
+    <div id="result-products"></div>
+    <div class="buttons-container">
+        <button id="crop-button" class="hidden mdc-fab material-icons">
+            <span class="mdc-fab__icon">
+                <img src="assets/ic_crop_white_24px.svg" width="24" alt="crop icon">
+            </span>
+        </button>
+        <button id="search-button" class="hidden mdc-fab material-icons">
+            <span class="mdc-fab__icon">
+                <img src="assets/ic_send_white_24px.svg" alt="send icon">
+            </span>
+        </button>
+        <button id="retake-picture" class="mdc-fab material-icons hidden" aria-label="Favorite">
+        <span class="mdc-fab__icon">
+            <img src="assets/ic_cancel_white_24px.svg" alt="cancel icon">
+        </span>
+        </button>
+    </div>
+</div>
+<script src="node_modules/cropperjs/dist/cropper.js"></script>
+<script type="application/javascript" src="js/script.js"></script>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script src="js/canvas-to-blob.min.js"></script>
+<script src="node_modules/material-components-web/dist/material-components-web.js"></script>
+<script>mdc.autoInit()</script>
+</body>
+</html>

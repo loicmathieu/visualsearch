@@ -1,0 +1,12 @@
+{
+  "name": "visualsearch",
+  "version": "0.1.2",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.17.1",
+    "cropperjs": "^1.2.2",
+    "material-components-web": "^0.27.0"
+  },
+  "devDependencies": {}
+}
