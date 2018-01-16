@@ -69,7 +69,10 @@
                 hide(cropContainer);
                 hide(cropButton);
                 show(retakePicture);
-                show(searchButton);
+                // show(searchButton);
+                result.toBlob((blob) => {
+                    getSimilarProducts(blob);
+                }, 'image/jpeg', 0.15)
             });
 
             searchButton.addEventListener('click', () => {
@@ -199,12 +202,17 @@
             el.classList.add('hidden');
         }
 
-        function getSimilarProducts(image) {
+        function getSimilarProducts(blob) {
             hide(optionContainer);
             show(loader);
-            const file = document.getElementById('image-input').files[0];
+            // const canvas = document.getElementsByTagName('canvas')[0];
+            // const img = new Image();
+            // img.onloadend = () => {
+            //     imc.src = canvas.toDataURL();
+            // }
+            // const blob = canvas.toBlob();
             let formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', blob);
             const url = `https://api.kiabi.com/v1/recommendations?universe=${univers}`;
 
             axios.post(url, formData).then((response) => {
@@ -234,9 +242,13 @@
                 let title = document.createElement('h2');
                 title.innerText = formatRef;
 
+                let indiceSimilarité = document.createElement('h3');
+                indiceSimilarité.innerText = `Indice: ${data[1].toFixed(3)}`;
+
                 resultProducts.appendChild(card);
                 card.appendChild(newImg);
                 card.appendChild(title);
+                card.appendChild(indiceSimilarité);
             });
             hide(loader);
             show(optionContainer);
