@@ -6,26 +6,19 @@
     window.onload = () => {
         console.log('Application loaded !');
 
-        const imageInput = document.getElementById('image-input');
-        const takePictureButton = document.getElementById('take-picutre');
-        const takePictureContainer = document.getElementById('take-picture-container');
-        const uploadPictureButton = document.getElementById('upload-picture-button');
-        const uploadPictureContainer = document.getElementById('upload-picture-container');
-        const image = document.getElementById('image');
         const cropButton = document.getElementById('crop-button');
         let croppedImage = document.getElementById('cropped-image');
-        const resultPicture = document.getElementById('result-picture');
         const pictureIconButton = document.getElementById('picture-icon-button');
         const preview = document.getElementById('preview-image'); //selects the query named img
         const retakePicture = document.getElementById('retake-picture');
         const cropContainer = document.getElementById('crop-container');
         const inputContainer = document.getElementById('input-container');
         const searchButton = document.getElementById('search-button');
-        const croppedPreview = document.getElementById('cropped-preview');
         const resultProducts = document.getElementById('result-products');
         const optionContainer = document.getElementsByClassName('options-container')[0];
         const selectUniversContainer = document.getElementById('select-univers-container');
         const loader = document.getElementById('loader');
+        const backButton = document.getElementById('back-button');
         const rbtnFemme = document.getElementById('femme');
         const rbtnHomme = document.getElementById('homme');
         const rbtnFille = document.getElementById('fille');
@@ -34,16 +27,6 @@
         let univers = 'UNV1000001';
         let result;
         let cropper;
-        let streamVar;
-
-        let streaming = false,
-            video = document.querySelector('#video'),
-            cover = document.querySelector('#cover'),
-            canvas = document.querySelector('#canvas'),
-            photo = document.querySelector('#photo'),
-            startbutton = document.querySelector('#startbutton'),
-            width = 320,
-            height = 0;
 
         hide(preview);
 
@@ -80,7 +63,9 @@
                 canvas.toBlob((blob) => {
                     getSimilarProducts(blob);
                 }, 'image/jpeg', 0.15)
-            })
+            });
+
+            backButton.addEventListener('click', back, true);
         }
 
         function setUnivers(event) {
@@ -123,33 +108,6 @@
             });
         }
 
-        function loadCamera() {
-            navigator.getMedia = (navigator.getUserMedia ||
-                navigator.webkitGetUserMedia ||
-                navigator.mozGetUserMedia ||
-                navigator.msGetUserMedia);
-
-            navigator.getMedia(
-                {
-                    video: true,
-                    audio: false
-                },
-                (stream) => {
-                    streamVar = stream;
-                    if (navigator.mozGetUserMedia) {
-                        video.mozSrcObject = stream;
-                    } else {
-                        var vendorURL = window.URL || window.webkitURL;
-                        video.src = vendorURL.createObjectURL(stream);
-                    }
-                    video.play();
-                },
-                (err) => {
-                    console.log("An error occured! " + err);
-                }
-            );
-        }
-
         function previewFile(input) {
             const file = input.files[0]; //sames as here
             const reader = new FileReader();
@@ -157,6 +115,8 @@
             reader.onloadend = function () {
                 preview.src = reader.result;
                 loadCropping();
+                inputContainer.reset();
+                inputContainer.removeChild(input);
             };
 
             if (file) {
@@ -164,19 +124,6 @@
             } else {
                 preview.src = "";
             }
-        }
-
-        function takepicture() {
-            canvas.width = width;
-            canvas.height = height;
-            canvas.getContext('2d').drawImage(video, 0, 0, width, height);
-            let data = canvas.toDataURL('image/png');
-            photo.setAttribute('src', data);
-            loadCropping(photo);
-            show(cropButton);
-            hide(takePictureContainer);
-            show(resultPicture);
-            streamVar.getTracks().forEach(track => track.stop());
         }
 
         function loadCropping() {
@@ -205,12 +152,6 @@
         function getSimilarProducts(blob) {
             hide(optionContainer);
             show(loader);
-            // const canvas = document.getElementsByTagName('canvas')[0];
-            // const img = new Image();
-            // img.onloadend = () => {
-            //     imc.src = canvas.toDataURL();
-            // }
-            // const blob = canvas.toBlob();
             let formData = new FormData();
             formData.append('file', blob);
             const url = `https://api.kiabi.com/v1/recommendations?universe=${univers}`;
@@ -254,5 +195,14 @@
             show(optionContainer);
         }
 
+        function back() {
+            document.getElementById('preview-image').cropper('reset');
+            show(selectUniversContainer);
+            show(pictureIconButton);
+            hide(cropContainer);
+            hide(preview);
+            hide(cropButton);
+            hide(retakePicture);
+        }
     }
 })();
