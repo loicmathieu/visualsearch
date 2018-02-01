@@ -17,8 +17,13 @@
 <header class="mdc-toolbar mdc-toolbar--fixed">
     <div class="mdc-toolbar__row">
         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-            <img id="back-button" class="material-icons mdc-toolbar__menu-icon" src="assets/ic_arrow_back_white_24px.svg" alt="back icon">
-            <span class="mdc-toolbar__title">Visual Search</span>
+            <img id="back-button" class="material-icons mdc-toolbar__menu-icon hidden" src="assets/ic_arrow_back_white_24px.svg" alt="back icon">
+            <span class="mdc-toolbar__title">Recherche par image</span>
+        </section>
+        <section class="mdc-toolbar__section mdc-toolbar__section--align-end" style="padding-right: 8px;">
+            <button id="restart-button" class="mdc-button secondary-text-button mdc-button--raised hidden" style="color: white; background-color: #F65455">
+                Recommencer
+            </button>
         </section>
     </div>
 </header>
@@ -90,22 +95,12 @@
     </div>
     <div id="cropped-image"></div>
     <img id="cropped-preview" src="" alt="">
-    <div id="result-products"></div>
+    <div id="result-products" class="hidden"></div>
     <div class="buttons-container">
-        <button id="crop-button" class="hidden mdc-fab material-icons">
-            <span class="mdc-fab__icon">
-                <img src="assets/ic_crop_white_24px.svg" width="24" alt="crop icon">
+        <button id="crop-button" class="hidden mdc-fab">
+            <span class="mdc-fab__icon" style="font-size: 16px; font-weight: bold">
+                OK
             </span>
-        </button>
-        <button id="search-button" class="hidden mdc-fab material-icons">
-            <span class="mdc-fab__icon">
-                <img src="assets/ic_send_white_24px.svg" alt="send icon">
-            </span>
-        </button>
-        <button id="retake-picture" class="mdc-fab material-icons hidden" aria-label="Favorite">
-        <span class="mdc-fab__icon">
-            <img src="assets/ic_cancel_white_24px.svg" alt="cancel icon">
-        </span>
         </button>
     </div>
 </div>
